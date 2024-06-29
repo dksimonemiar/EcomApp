@@ -17,7 +17,7 @@ public class ProductService : IProductService
         return await _context.Reviews.Where(r=> r.ProductId == id).ToListAsync();
     }
     
-    public async Task<Review> PostProductReview(int id, Review review)
+    public async Task<Review> PostProductReview(int id, ReviewDTO review)
     {
         var currentUserId = 1;
         var newReview = new Review
