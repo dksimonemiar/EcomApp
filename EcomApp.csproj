@@ -24,6 +24,7 @@
 
     <ItemGroup>
       <Folder Include="Architecture\Database-design\" />
+      <Folder Include="Tests\" />
     </ItemGroup>
 
 </Project>
