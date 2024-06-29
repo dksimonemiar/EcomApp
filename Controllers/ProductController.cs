@@ -20,7 +20,8 @@ public class ProductController : ControllerBase
     {
         try 
         {
-            return Ok(id);
+            var reviews = await _productService.GetProductReviews(id);
+            return Ok(reviews);
         }
         catch (Exception ex)
         {
@@ -29,7 +30,7 @@ public class ProductController : ControllerBase
     }
     // POST: api/review
     [HttpPost("{id}/reviews")]
-    public async Task<ActionResult<Review>> PostReview(int id, Review review)
+    public async Task<ActionResult<Review>> PostReview(int id, [FromBody]ReviewDTO review)
     {
         try 
         {

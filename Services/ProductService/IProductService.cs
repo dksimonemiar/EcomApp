@@ -5,5 +5,5 @@ namespace EcomApp.Services.ProductService;
 public interface IProductService
 {
     Task<List<Review>> GetProductReviews(int id);
-    Task<Review> PostProductReview(int id, Review review);
+    Task<Review> PostProductReview(int id, ReviewDTO review);
 }
