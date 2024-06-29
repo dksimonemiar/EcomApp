@@ -9,4 +9,9 @@ public class ProductContext : DbContext
     {
     }
     public DbSet<Review> Reviews { get; set; } = null!;
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Review>().HasKey(r => new { r.UserId, r.ProductId });
+    }
 }

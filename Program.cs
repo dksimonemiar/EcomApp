@@ -1,10 +1,12 @@
 using EcomApp.Data;
 using Microsoft.EntityFrameworkCore;
+using EcomApp.Services.ProductService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddScoped<IProductService, ProductService>(); // Register the service
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ProductContext>(opt =>
     opt.UseInMemoryDatabase("ProductList"));
