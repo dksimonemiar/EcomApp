@@ -9,6 +9,11 @@ namespace EcomApp.Controllers;
 [ApiController]
 public class ProductController : ControllerBase
 {
+    private readonly IProductService _productService;
+    public ProductController(IProductService productService)
+    {
+        _productService = productService;
+    }
     // GET: api/review
     [HttpGet("{id}/reviews")]
     public async Task<ActionResult<IEnumerable<Review>>> GetReviews(int id)
@@ -16,6 +21,24 @@ public class ProductController : ControllerBase
         try 
         {
             return Ok(id);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+    // POST: api/review
+    [HttpPost("{id}/reviews")]
+    public async Task<ActionResult<Review>> PostReview(int id, Review review)
+    {
+        try 
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var newReview = await _productService.PostProductReview(id, review);
+            return Ok(newReview);
         }
         catch (Exception ex)
         {
