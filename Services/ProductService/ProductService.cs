@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using EcomApp.Data;
+using EcomApp.Exceptions;
 using EcomApp.Models;
 
 namespace EcomApp.Services.ProductService;
@@ -12,18 +13,23 @@ public class ProductService : IProductService
     {
         _context = context;
     }
-    public async Task<List<Review>> GetProductReviews(int id)
+    public async Task<List<Review>> GetProductReviews(int productId)
     {
-        return await _context.Reviews.Where(r=> r.ProductId == id).ToListAsync();
+        return await _context.Reviews.Where(r=> r.ProductId == productId).ToListAsync();
     }
     
-    public async Task<Review> PostProductReview(int id, ReviewDTO review)
+    public async Task<Review> PostProductReview(int productId, ReviewDTO review)
     {
-        var currentUserId = 1;
+        // Check if the user has already reviewed the product - secure async call
+        var existingReview = await _context.Reviews.FirstOrDefaultAsync(r => r.ProductId == productId && r.UserId == review.UserId);
+        if (existingReview != null)
+        {
+            throw new HttpStatusCodeException(400, "User has already reviewed this product.");
+        }
         var newReview = new Review
         {
-            ProductId = id,
-            UserId = currentUserId,
+            ProductId = productId,
+            UserId = review.UserId,
             Rating = review.Rating,
             Content = review.Content
         };
