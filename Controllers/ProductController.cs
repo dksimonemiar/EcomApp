@@ -15,7 +15,7 @@ public class ProductController : ControllerBase
     {
         _productService = productService;
     }
-    // GET: api/review
+    // GET: api/products/{productId}/reviews
     [HttpGet("{productId}/reviews")]
     public async Task<ActionResult<IEnumerable<Review>>> GetReviews(int productId)
     {
@@ -29,7 +29,7 @@ public class ProductController : ControllerBase
             return StatusCode(500, ex.Message);
         }
     }
-    // POST: api/review
+    // POST: api/products/{productId}/reviews
     [HttpPost("{productId}/reviews")]
     public async Task<ActionResult<Review>> PostReview(int productId, [FromBody]ReviewDTO review)
     {
