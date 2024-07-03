@@ -18,7 +18,7 @@ public class ProductService : IProductService
         return await _context.Reviews.Where(r=> r.ProductId == productId).ToListAsync();
     }
     
-    public async Task<Review> PostProductReview(int productId, ReviewDTO review)
+    public async Task<Review> CreateProductReview(int productId, ReviewDTO review)
     {
         // Check if the user has already reviewed the product - secure async call
         var existingReview = await _context.Reviews.FirstOrDefaultAsync(r => r.ProductId == productId && r.UserId == review.UserId);

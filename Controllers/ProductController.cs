@@ -39,7 +39,7 @@ public class ProductController : ControllerBase
             {
                 return BadRequest(ModelState);
             }
-            var newReview = await _productService.PostProductReview(productId, review);
+            var newReview = await _productService.CreateProductReview(productId, review);
             return Ok(newReview);
         }
         catch (HttpStatusCodeException ex)
