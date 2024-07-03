@@ -8,4 +8,4 @@
 ![Component Diagram](rendered-views/componentDiagram.jpg)
 
 ## Code level
-![Code Diagram](rendered-views/(codeDiagram.jpg))
+![Code Diagram](rendered-views/codeDiagram.jpg)
