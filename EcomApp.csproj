@@ -23,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Architecture\C4-model\rendered-views\" />
       <Folder Include="Architecture\Database-design\" />
       <Folder Include="Tests\" />
     </ItemGroup>
